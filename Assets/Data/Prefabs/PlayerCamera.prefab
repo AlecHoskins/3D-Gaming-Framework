@@ -216,3 +216,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 8302578208553820999}
   player: {fileID: 0}
+  cameraPivotTransform: {fileID: 1367604284130183782}
+  cameraCollisionRadius: 0
+  horizontalRotationSpeed: 0
+  verticalRotationSpeed: 0
+  minPivot: 0
+  maxPivot: 0
+  collideWithLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  horizontalLookAngle: 0
+  verticalLookAngle: 0

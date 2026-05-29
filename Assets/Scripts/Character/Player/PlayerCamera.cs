@@ -10,6 +10,7 @@ public class PlayerCamera : MonoBehaviour
     public Camera cameraObject;
     public PlayerManager player;
     [SerializeField] Transform cameraPivotTransform;
+    [SerializeField] float cameraCollisionRadius; //highest point you can look up 
 
     #region CHANGEABLE SETTINGS TO CHANGE CAMERA BEHAVIOR
 
@@ -19,6 +20,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] float verticalRotationSpeed;
     [SerializeField] float minPivot;
     [SerializeField] float maxPivot;
+    [SerializeField] LayerMask collideWithLayers; 
 
     #endregion
 
@@ -26,8 +28,12 @@ public class PlayerCamera : MonoBehaviour
 
     [Header("Camera Values")]
     private Vector3 cameraVelocity;
+    private Vector3 cameraObjectPosition; //camera moved to this position on collision
     [SerializeField] float horizontalLookAngle; //lowest point you can look down 
     [SerializeField] float verticalLookAngle; //highest point you can look up 
+    //used for camera collision
+    private float cameraZPosition; 
+    private float targetCameraZPosition;
 
     #endregion
 
@@ -42,6 +48,7 @@ public class PlayerCamera : MonoBehaviour
             horizontalRotationSpeed = 220;
             minPivot = -30;
             maxPivot = 60;
+            cameraCollisionRadius = 0.2f;
         }
         else
         {
@@ -52,19 +59,17 @@ public class PlayerCamera : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        cameraZPosition = cameraObject.transform.localPosition.z;
     }
 
     public void HandleAllCameraActions()
     {
         if(player != null)
         {
-            //follow player
             HandleFollowTarget();
-
-            //rotate around player
             HandleRotations();
-
-            //collide with objects
+            HandleCollision();
         }
 
 
@@ -107,5 +112,34 @@ public class PlayerCamera : MonoBehaviour
         cameraRotation.x = verticalLookAngle;
         targetRotation = Quaternion.Euler(cameraRotation);
         cameraPivotTransform.localRotation = targetRotation;
+    }
+
+    private void HandleCollision()
+    {
+        targetCameraZPosition = cameraZPosition;
+        RaycastHit hit;
+        Vector3 direction = cameraObject.transform.position - cameraPivotTransform.position;
+        direction.Normalize();
+
+        if(
+            Physics.SphereCast(
+                cameraPivotTransform.position, 
+                cameraCollisionRadius, 
+                direction, 
+                out hit, Mathf.Abs(targetCameraZPosition), collideWithLayers
+            )
+        ){
+            float distanceFromHitObject = Vector3.Distance(cameraPivotTransform.position, hit.point);
+            Debug.Log($"distanceFromHitObject: {distanceFromHitObject} \ntargetCameraZPosition: {targetCameraZPosition} \ncameraCollisionRadius: {cameraCollisionRadius}");
+            targetCameraZPosition = -(distanceFromHitObject - cameraCollisionRadius);
+        }
+
+        if(Mathf.Abs(targetCameraZPosition) < cameraCollisionRadius)
+        {
+            targetCameraZPosition = -cameraCollisionRadius;
+        }
+
+        cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
+        cameraObject.transform.localPosition = cameraObjectPosition;
     }
 }
