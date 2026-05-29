@@ -122,12 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!20 &179333856 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8302578208553820999, guid: c78a623f5b1acb54e9a9906f46c91c78,
-    type: 3}
-  m_PrefabInstance: {fileID: 8783506528268326310}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1252,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118421594}
   m_CullTransparentMesh: 1
+--- !u!4 &2521405924148850270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1367604284130183782, guid: c78a623f5b1acb54e9a9906f46c91c78,
+    type: 3}
+  m_PrefabInstance: {fileID: 8439320128345858306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4386167888359557182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1462,7 +1462,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d758d33f0800f0408e4f209e96a20a3, type: 3}
---- !u!1001 &8783506528268326310
+--- !u!1001 &8439320128345858306
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1470,10 +1470,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1367604284130183782, guid: c78a623f5b1acb54e9a9906f46c91c78,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.55
+      objectReference: {fileID: 0}
     - target: {fileID: 3759794692399932645, guid: c78a623f5b1acb54e9a9906f46c91c78,
         type: 3}
       propertyPath: m_Name
-      value: PlayerCamera
+      value: Player Camera (Left and Right)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968742544562955271, guid: c78a623f5b1acb54e9a9906f46c91c78,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 8004721349130599622, guid: c78a623f5b1acb54e9a9906f46c91c78,
         type: 3}
@@ -1527,9 +1537,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9159094102726881533, guid: c78a623f5b1acb54e9a9906f46c91c78,
         type: 3}
-      propertyPath: cameraObject
+      propertyPath: cameraPivotTransform
       value: 
-      objectReference: {fileID: 179333856}
+      objectReference: {fileID: 2521405924148850270}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1615,4 +1625,4 @@ SceneRoots:
   - {fileID: 5202129040098197058}
   - {fileID: 7555752337494174272}
   - {fileID: 9006896544092800501}
-  - {fileID: 8783506528268326310}
+  - {fileID: 8439320128345858306}

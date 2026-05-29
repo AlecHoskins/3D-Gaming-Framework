@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterManager : NetworkBehaviour
@@ -38,5 +39,10 @@ public class CharacterManager : NetworkBehaviour
             characterNetworkManager.networkRotation.Value, 
             characterNetworkManager.networkRotationSmoothTime
         );
+    }
+
+    protected virtual void LateUpdate()
+    {
+
     }
 }

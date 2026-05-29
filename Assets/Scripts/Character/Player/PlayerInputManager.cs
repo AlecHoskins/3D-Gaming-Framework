@@ -8,10 +8,18 @@ public class PlayerInputManager : MonoBehaviour
     public static PlayerInputManager instance;
 
     PlayerControls playerControls;
+
+    [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
     [SerializeField] public float verticalInput;
     [SerializeField] public float horizontalInput;
     [SerializeField] public float moveAmount;
+
+    [Header("Camera Rotation Input")]
+    [SerializeField] Vector2 cameraInput;
+    [SerializeField] public float cameraVerticalInput;
+    [SerializeField] public float cameraHorizontalInput;
+
 
     private void Awake()
     {
@@ -51,6 +59,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls = new PlayerControls();
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
         }
         playerControls.Enable();
     }
@@ -78,9 +87,10 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
-        HandleMovementInput();
+        HandlePlayerMovementInput();
+        HandleCameraMovementInput();
     }
-    private void HandleMovementInput()
+    private void HandlePlayerMovementInput()
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
@@ -93,6 +103,25 @@ public class PlayerInputManager : MonoBehaviour
 
         }
         else if(moveAmount > 0.5 && moveAmount <= 1)
+        {
+            moveAmount = 1;
+
+        }
+    }
+
+    private void HandleCameraMovementInput()
+    {
+        cameraVerticalInput = cameraInput.y;
+        cameraHorizontalInput = cameraInput.x;
+
+        moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+
+        if (moveAmount <= 0.5 && moveAmount > 0)
+        {
+            moveAmount = 0.5f;
+
+        }
+        else if (moveAmount > 0.5 && moveAmount <= 1)
         {
             moveAmount = 1;
 
