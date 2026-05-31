@@ -1315,6 +1315,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: World NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6964135116637241089, guid: 03717fa88a0d39747a56a0d2907e64e2,
+        type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 5548198337584537170, guid: 6d390f073d5701e42872a20433f17021,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1517,6 +1523,26 @@ PrefabInstance:
     - target: {fileID: 8004721349130599622, guid: c78a623f5b1acb54e9a9906f46c91c78,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302578208553820999, guid: c78a623f5b1acb54e9a9906f46c91c78,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302578208553820999, guid: c78a623f5b1acb54e9a9906f46c91c78,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302578208553820999, guid: c78a623f5b1acb54e9a9906f46c91c78,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302578208553820999, guid: c78a623f5b1acb54e9a9906f46c91c78,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

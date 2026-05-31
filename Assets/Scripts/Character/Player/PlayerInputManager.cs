@@ -8,6 +8,7 @@ public class PlayerInputManager : MonoBehaviour
     public static PlayerInputManager instance;
 
     PlayerControls playerControls;
+    public PlayerManager player;
 
     [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
@@ -126,5 +127,7 @@ public class PlayerInputManager : MonoBehaviour
             moveAmount = 1;
 
         }
+        //we dont want to pass horizontal animation unless we are strafing
+        player.playerAnimationManager.UpdateAnimatorMovementParameters(0,moveAmount);
     }
 }
