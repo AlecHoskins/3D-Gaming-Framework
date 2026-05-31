@@ -108,6 +108,11 @@ public class PlayerInputManager : MonoBehaviour
             moveAmount = 1;
 
         }
+
+        if(player == null) { return; }
+
+        //we dont want to pass horizontal animation unless we are strafing
+        player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount);
     }
 
     private void HandleCameraMovementInput()
@@ -127,7 +132,5 @@ public class PlayerInputManager : MonoBehaviour
             moveAmount = 1;
 
         }
-        //we dont want to pass horizontal animation unless we are strafing
-        player.playerAnimationManager.UpdateAnimatorMovementParameters(0,moveAmount);
     }
 }

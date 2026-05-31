@@ -12,10 +12,8 @@ public class CharacterAnimationManager : MonoBehaviour
     }
     public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue)
     {
-        Debug.Log($"MOVING - HV: {horizontalValue}, {verticalValue}");
-
-        //If this ends up needing to get snapped, watch episode 5 13:25 
-        character.animator.SetFloat("Horizontal", horizontalValue);
-        character.animator.SetFloat("Vertical", verticalValue);
+        //The arguments "0.1f, Time.deltaTime" make it so that the transition between animations is smooth instead of immediate
+        character.animator.SetFloat("Horizontal", horizontalValue, 0.1f, Time.deltaTime);
+        character.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
     }
 }
