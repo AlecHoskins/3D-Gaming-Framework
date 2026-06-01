@@ -71,8 +71,6 @@ public class PlayerCamera : MonoBehaviour
             HandleRotations();
             HandleCollision();
         }
-
-
     }
 
     private void HandleFollowTarget()
@@ -129,8 +127,15 @@ public class PlayerCamera : MonoBehaviour
                 out hit, Mathf.Abs(targetCameraZPosition), collideWithLayers
             )
         ){
+            //This prevents the camera from changing position due to collisions with characters.
+            //TODO: Will need to do the same for game enemies too, normal sized ones at least. 
+            //Will need to experiment with giant boss enemies to see what feels right
+            if(hit.collider.gameObject.name == "Player(Clone)")
+            {
+                return;
+            }
+
             float distanceFromHitObject = Vector3.Distance(cameraPivotTransform.position, hit.point);
-            Debug.Log($"distanceFromHitObject: {distanceFromHitObject} \ntargetCameraZPosition: {targetCameraZPosition} \ncameraCollisionRadius: {cameraCollisionRadius}");
             targetCameraZPosition = -(distanceFromHitObject - cameraCollisionRadius);
         }
 
