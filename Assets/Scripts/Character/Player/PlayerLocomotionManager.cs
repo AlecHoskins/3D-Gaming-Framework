@@ -28,24 +28,46 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         rotationSpeed = 15;
     }
 
+    protected override  void Update()
+    {
+        base.Update();
+
+        if (player.IsOwner)
+        {
+            player.characterNetworkManager.verticalMovement.Value = verticalMovement;
+            player.characterNetworkManager.horizontalMovement.Value = horizontalMovement;
+            player.characterNetworkManager.moveAmount.Value = moveAmount;
+        }
+        else
+        {
+            verticalMovement = player.characterNetworkManager.verticalMovement.Value;
+            horizontalMovement = player.characterNetworkManager.horizontalMovement.Value;
+            moveAmount = player.characterNetworkManager.moveAmount.Value;
+
+            //if not locked on
+            player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount);
+
+            //todo if locked on
+            //todo if sprinting
+        }
+    }
+
     public void HandleAllMovement()
     {
         HandleGroundedMovement();
         HandleRotation();
     }
 
-    private void GetVerticalAndHorizontalInputs()
+    private void GetMovementInputs()
     {
         verticalMovement = PlayerInputManager.instance.verticalInput;
         horizontalMovement = PlayerInputManager.instance.horizontalInput;
-
         moveAmount = PlayerInputManager.instance.moveAmount;
-        //TODO clamp the movements
     }
 
     private void HandleGroundedMovement()
     {
-        GetVerticalAndHorizontalInputs();
+        GetMovementInputs();
 
         //movement direction is based on camera perspective and movement input
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
