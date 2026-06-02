@@ -26,7 +26,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         base.Awake();
         player = GetComponent<PlayerManager>();
 
-        walkingSpeed = 1.35f;
+        walkingSpeed = 1.25f;
         runningSpeed = 5;
         rotationSpeed = 15;
     }
@@ -136,6 +136,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         else
         {
             //TODO IMPLEMENT BACKSTEP ANIMATION
+            player.playerAnimationManager.PlayTargetActionAnimation("backstep", true, true);
         }
 
         player.isPerformingAction = false;
