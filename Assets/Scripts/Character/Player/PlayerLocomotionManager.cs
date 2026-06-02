@@ -7,23 +7,26 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     PlayerManager player;
 
-    [SerializeField] public float verticalMovement;
-    [SerializeField] public float horizontalMovement;
-    [SerializeField] public float moveAmount;
+    [HideInInspector] public float verticalMovement;
+    [HideInInspector] public float horizontalMovement;
+    [HideInInspector] public float moveAmount;
 
+    [Header("MovementSettings")]
     private Vector3 moveDirection;
     private Vector3 targetRotationDirection;
-
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
     [SerializeField] float rotationSpeed;
+
+    [Header("Dodge")]
+    private Vector3 rollDirection;
 
     protected override void Awake()
     {
         base.Awake();
         player = GetComponent<PlayerManager>();
 
-        walkingSpeed = 2;
+        walkingSpeed = 1.35f;
         runningSpeed = 5;
         rotationSpeed = 15;
     }
@@ -109,5 +112,32 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         );
 
         transform.rotation = targetRotation;
+    }
+
+    public void AttemptToHandleDodge()
+    {
+        if(player.isPerformingAction) { return; }
+
+        //if moving, roll
+        if(PlayerInputManager.instance.moveAmount > 0)
+        {
+            rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
+            rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
+            rollDirection.y = 0;
+            rollDirection.Normalize();
+
+            Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
+            player.transform.rotation = playerRotation;
+
+            //TODO IMPLEMENT ROLL ANIMATION
+            player.playerAnimationManager.PlayTargetActionAnimation("dodge_roll", true, true);
+        }
+        //else backstep
+        else
+        {
+            //TODO IMPLEMENT BACKSTEP ANIMATION
+        }
+
+        player.isPerformingAction = false;
     }
 }

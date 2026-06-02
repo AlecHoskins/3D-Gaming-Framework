@@ -10,9 +10,14 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public CharacterNetworkManager characterNetworkManager;
 
+    [Header("Flags")]
+    public bool isPerformingAction;
+
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);
+
+        isPerformingAction = false;
 
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
