@@ -26,7 +26,6 @@ public class CharacterAnimationManager : MonoBehaviour
         character.animator.CrossFade(targetAnimation, 0.2f);
         //can be used to stop character from performing a new action
         character.isPerformingAction = isPerformingAction;
-        Debug.Log($"{targetAnimation} performing: {isPerformingAction} | applied: {applyRootMotion}");
 
     }
 }

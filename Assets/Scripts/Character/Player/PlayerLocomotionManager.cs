@@ -26,7 +26,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         base.Awake();
         player = GetComponent<PlayerManager>();
 
-        walkingSpeed = 1.25f;
+        walkingSpeed = 1.10f;
         runningSpeed = 5;
         rotationSpeed = 15;
     }
@@ -139,6 +139,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             player.playerAnimationManager.PlayTargetActionAnimation("backstep", true, true);
         }
 
-        player.isPerformingAction = false;
+        //player.isPerformingAction = false;
     }
 }

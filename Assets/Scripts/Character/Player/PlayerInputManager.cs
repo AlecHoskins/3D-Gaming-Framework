@@ -154,9 +154,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             dodgeInput = false;
 
-            //dodge
             player.playerLocomotionManager.AttemptToHandleDodge();
-            //backstep
         }
     }
     #endregion
