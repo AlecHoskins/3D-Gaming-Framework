@@ -26,7 +26,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         base.Awake();
         player = GetComponent<PlayerManager>();
 
-        walkingSpeed = 1.08f;
+        walkingSpeed = 1.5f;
         runningSpeed = 5;
         rotationSpeed = 15;
     }
