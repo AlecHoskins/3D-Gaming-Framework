@@ -12,12 +12,16 @@ public class CharacterManager : NetworkBehaviour
 
     [Header("Flags")]
     public bool isPerformingAction;
+    public bool canMove;
+    public bool canRotate;
 
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);
 
         isPerformingAction = false;
+        canMove = true;
+        canRotate = true;
 
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();

@@ -15,6 +15,8 @@ public class ResetCharacterFlags : StateMachineBehaviour
         }
 
         player.isPerformingAction = false;
+        player.canMove = true;
+        player.canRotate = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

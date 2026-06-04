@@ -20,12 +20,21 @@ public class CharacterAnimationManager : MonoBehaviour
         character.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
     }
 
-    public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion)
+    public virtual void PlayTargetActionAnimation
+    (
+        string targetAnimation, 
+        bool isPerformingAction, 
+        bool applyRootMotion,
+        bool canRotate = false,
+        bool canMove = false
+    )
     {
         character.animator.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
         //can be used to stop character from performing a new action
         character.isPerformingAction = isPerformingAction;
+        character.canRotate = canRotate;
+        character.canMove = canMove;
 
     }
 }
